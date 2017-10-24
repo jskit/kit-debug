@@ -86,13 +86,22 @@ class VConsoleLogTab extends VConsolePlugin {
 
   onAddTool(callback) {
     let that = this;
-    let toolList = [{
-      name: 'Clear',
-      global: false,
-      onClick: function() {
-        that.clearLog();
-      }
-    }];
+    let toolList = [
+      {
+        name: 'Reload',
+        global: false,
+        onClick: function() {
+          window.location.reload();
+        }
+      },
+      {
+        name: 'Clear',
+        global: false,
+        onClick: function() {
+          that.clearLog();
+        }
+      },
+    ];
     callback(toolList);
   }
 
