@@ -1,4 +1,4 @@
-describe("vConsole", function() {
+describe("kit-debug", function() {
 
   var assert = require('chai').assert;
   var util = require('util');
