@@ -5,6 +5,7 @@
   "homepage": "https://github.com/jskit/kit-debug",
   "main": "dist/vconsole.min.js",
   "scripts": {
+    "dev": "hs -p 8901 -o",
     "test": "mocha",
     "dist": "webpack"
   },
