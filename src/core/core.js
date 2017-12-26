@@ -26,10 +26,11 @@ import tplToolItem from './tool_item.html';
 
 // built-in plugins
 import VConsoleDefaultPlugin from '../log/default.js';
-import VConsoleSystemPlugin from '../log/system.js';
+import VConsoleApiPlugin from '../api/api.js';
 import VConsoleNetworkPlugin from '../network/network.js';
 import VConsoleElementPlugin from '../element/element.js';
 import VConsoleStoragePlugin from '../storage/storage.js';
+import VConsoleSystemPlugin from '../log/system.js';
 
 const VCONSOLE_ID = '#__vconsole';
 
@@ -47,7 +48,13 @@ class VConsole {
 
     this.isInited = false;
     this.option = {
-      defaultPlugins: ['system', 'network', 'element', 'storage']
+      defaultPlugins: [
+        'api',
+        'network',
+        'element',
+        'storage',
+        'system',
+      ]
     };
 
     this.activedTab = '';
@@ -118,10 +125,11 @@ class VConsole {
     // add other built-in plugins according to user's config
     const list = this.option.defaultPlugins;
     const plugins = {
-      'system': {proto: VConsoleSystemPlugin, name: 'System'},
+      'api': {proto: VConsoleApiPlugin, name: 'Api'},
       'network': {proto: VConsoleNetworkPlugin, name: 'Network'},
       'element': {proto: VConsoleElementPlugin, name: 'Element'},
-      'storage': {proto: VConsoleStoragePlugin, name: 'Storage'}
+      'storage': {proto: VConsoleStoragePlugin, name: 'Storage'},
+      'system': {proto: VConsoleSystemPlugin, name: 'System'},
     };
     if (!!list && tool.isArray(list)) {
       for (let i=0; i<list.length; i++) {
@@ -396,6 +404,19 @@ class VConsole {
     if (this.tabList.length > 0) {
       this.showTab(this.tabList[0]);
     }
+
+    this.triggerEvent('ready');
+  }
+
+  /**
+   * trigger a vConsole.option event
+   * @protect
+   */
+  triggerEvent(eventName, param) {
+    eventName = 'on' + eventName.charAt(0).toUpperCase() + eventName.slice(1);
+    if (tool.isFunction(this.option[eventName])) {
+      this.option[eventName].apply(this, param);
+    }
   }
 
   /**
@@ -625,6 +646,29 @@ class VConsole {
       $mask.style.display = 'none';
       $panel.style.display = 'none';
     });
+  }
+
+  /**
+   * show switch button
+   * @public
+   */
+  showSwitch() {
+    if (!this.isInited) {
+      return;
+    }
+    let $switch = $.one('.vc-switch', this.$dom);
+    $switch.style.display = 'block';
+  }
+
+  /**
+   * hide switch button
+   */
+  hideSwitch() {
+    if (!this.isInited) {
+      return;
+    }
+    let $switch = $.one('.vc-switch', this.$dom);
+    $switch.style.display = 'none';
   }
 
   /**
