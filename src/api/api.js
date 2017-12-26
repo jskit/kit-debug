@@ -67,14 +67,15 @@ class VConsoleApiTab extends VConsolePlugin {
   onAddTool(callback) {
     let that = this;
     let toolList = [{
-      name: 'Refresh',
+      name: 'Reload',
       global: false,
       onClick: function(e) {
         // 刷新请求
-        that.renderApi();
+        window.location.reload();
+        // that.renderApi();
       }
     }, {
-      name: 'Clear',
+      name: 'Reset',
       global: false,
       onClick: function(e) {
         // 清除缓存
