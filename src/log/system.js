@@ -35,12 +35,14 @@ class VConsoleSystemTab extends VConsoleLogTab {
     let ua = navigator.userAgent,
       logMsg = '';
 
+    console.info('[system]', 'url:', location.href);
+
     // device & system
     let ipod = ua.match(/(ipod).*\s([\d_]+)/i),
       ipad = ua.match(/(ipad).*\s([\d_]+)/i),
       iphone = ua.match(/(iphone)\sos\s([\d_]+)/i),
       android = ua.match(/(android)\s([\d\.]+)/i);
-    
+
     logMsg = 'Unknown';
     if (android) {
       logMsg = 'Android ' + android[2];
@@ -87,7 +89,7 @@ class VConsoleSystemTab extends VConsoleLogTab {
 
     // User Agent
     console.info('[system]', 'UA:', ua);
-    
+
 
     // performance related
     // use `setTimeout` to make sure all timing points are available
