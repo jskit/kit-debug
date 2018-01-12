@@ -86,26 +86,33 @@ class VConsoleApiTab extends VConsolePlugin {
   }
 
   onReady() {
-    let that = this;
+    const that = this;
     that.isReady = true;
 
     // 绑定切换 API 事件
     $.delegate($.one('.vc-log', that.$tabbox), 'click', '.vc-table-col-value', function(e) {
       e.preventDefault();
-      let target = e.target;
-      let prev = target.previousElementSibling;
+      const target = e.target;
+      const prev = target.previousElementSibling;
+      const type = that.currentType || 'api';
       $.removeClass($.all('.active', e.currentTarget), 'active');
       $.addClass([target, prev], 'active');
-      let apiEnv = prev.innerText;
-      let store = {
-        api: {
-          name: apiEnv,
-          value: target.innerText,
-        },
+      const envName = prev.innerText;
+      const value = target.innerText;
+      let store = JSON.parse(localStorage.getItem(VCStoreApi) || '{}');
+      store[type] = {
+        name: envName,
+        value: value,
       };
-      console.log('api 切换为 ' + apiEnv + ' 环境：');
-      console.log(store.api);
+      console.log(`${type} 切换为 ${envName} 环境：`);
+      console.log(store);
       localStorage.setItem(VCStoreApi, JSON.stringify(store));
+      if(type === 'api'){
+        // 切换 api 自动刷新
+        window.location.reload();
+      } else if (type === 'host') {
+        window.location.href = value;
+      }
     });
   }
 
@@ -167,6 +174,7 @@ class VConsoleApiTab extends VConsolePlugin {
 // 全局配置 window.apiListConfig
 // 切换后，使用以下方式获取当前值
 // localStorage.getItem('VCStoreApi')
+// 注意 storage 根据域名来存取，变更host，将导致api 配置变化问题
 
 window.apiListConfig = {
   api: {
@@ -174,8 +182,6 @@ window.apiListConfig = {
     beta: 'xxx',
     beta1: 'xxx',
   },
-  // host 暂不启用模拟host
-  // 因 storage 根据域名来存取，变更将导致问题
   host: {
     dev: 'xxx',
     beta: 'xxx',

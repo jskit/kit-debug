@@ -7,17 +7,20 @@
   <title>Document</title>
   <script src="./dist/vconsole.min.js"></script>
   <script>
-  var vConsole = new VConsole();
+  var port = location.port === '80' ? '' : (':' + location.port);
+
+  // 支持动态切换 api 以及 host
   window.apiListConfig = {
     api: {
       dev: 'http://m.devapi.xxx.com',
       beta: 'http://m1.betaapi.xxx.com',
       beta2: 'http://m2.betaapi.xxx.com',
     },
-    // domain 暂不启用模拟环境
-    // 因 storage 根据域名来存取，变更将导致问题
-    domain: {
-      // 不启用模拟
+    host: {
+      localhost: 'http://localhost' + port,
+      '127.0.0.1': 'http://127.0.0.1' + port,
+      '0.0.0.0': 'http://0.0.0.0' + port,
+      'current': location.origin + port,
     },
   };
   </script>
@@ -25,4 +28,11 @@
 <body>
 
 </body>
+<script>
+var vConsole = new VConsole();
+var script = document.querySelectorAll('script')[1];
+var pre = document.createElement('pre');
+pre.innerHTML = script.innerHTML;
+document.body.appendChild(pre);
+</script>
 </html>
