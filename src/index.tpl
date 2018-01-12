@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="./dist/vconsole.min.js"></script>
+  <title>kit-debug by vConsole</title>
   <script>
   var port = location.port === '80' ? '' : (':' + location.port);
 
@@ -30,7 +29,7 @@
 </body>
 <script>
 var vConsole = new VConsole();
-var script = document.querySelectorAll('script')[1];
+var script = document.querySelectorAll('script')[0];
 var pre = document.createElement('pre');
 pre.innerHTML = script.innerHTML;
 document.body.appendChild(pre);
