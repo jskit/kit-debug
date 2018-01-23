@@ -1,5 +1,6 @@
 [English](./CHANGELOG.md) | 简体中文
 
+
 #### 自定义功能增强
 
 - 新增 Reload 方法 v1.0.1
@@ -8,7 +9,11 @@
 - 新增 system 显示当前 url v1.0.5
 - 新增编译后直接预览测试 v1.0.6
 
-#### V3.1.0-dev (2017-12-xx)
+#### V3.1.1 (2018-01-xx)
+
+- 【修复】修复初始化后立即调用 `setOption` 引起的错误。
+
+#### V3.1.0 (2017-12-27)
 
 - 【特性】新增 `vConsole.showSwitch()` 及 `vConsole.hideSwitch()` 方法，请查阅[公共属性及方法](./doc/public_properties_methods_CN.md)。
 - 【特性】新增 `onReady` 及 `onClearLog` 回调方法，位于 `vConsole.option`。
