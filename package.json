@@ -9,7 +9,7 @@
     "deploy": "gh-pages -d dist",
     "prepublishOnly": "npm run dist",
     "dev": "npm run dist && npm run serve",
-    "serve": "hs ./dist -p 8901 -o -c 1 ",
+    "serve": "npm run dist && hs ./dist -p 8901 -o -c 1 ",
     "test": "mocha",
     "dist": "webpack"
   },
