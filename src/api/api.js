@@ -71,7 +71,7 @@ class VConsoleApiTab extends VConsolePlugin {
       global: false,
       onClick: function(e) {
         // 刷新请求
-        window.location.reload(true);
+        window.location.reload();
         // that.renderApi();
       }
     }, {
