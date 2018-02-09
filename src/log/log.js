@@ -91,7 +91,7 @@ class VConsoleLogTab extends VConsolePlugin {
         name: 'Reload',
         global: false,
         onClick: function() {
-          window.location.reload();
+          window.location.reload(true);
         }
       },
       {

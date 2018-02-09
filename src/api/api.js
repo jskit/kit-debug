@@ -71,7 +71,7 @@ class VConsoleApiTab extends VConsolePlugin {
       global: false,
       onClick: function(e) {
         // 刷新请求
-        window.location.reload();
+        window.location.reload(true);
         // that.renderApi();
       }
     }, {
@@ -109,7 +109,7 @@ class VConsoleApiTab extends VConsolePlugin {
       localStorage.setItem(VCStoreApi, JSON.stringify(store));
       if(type === 'api'){
         // 切换 api 自动刷新
-        window.location.reload();
+        window.location.reload(true);
       } else if (type === 'host') {
         window.location.href = value;
       }
