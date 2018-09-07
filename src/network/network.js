@@ -208,6 +208,7 @@ class VConsoleNetworkTab extends VConsolePlugin {
       case 'json':
         if (typeof item.response != 'undefined') {
           domData.response = JSON.stringify(item.response, null, 1);
+          domData.response = tool.htmlEncode(domData.response);
         }
         break;
       case 'blob':
@@ -288,7 +289,10 @@ class VConsoleNetworkTab extends VConsolePlugin {
 
         // update status
         item.readyState = XMLReq.readyState;
-        item.status = XMLReq.status;
+        item.status = 0;
+        if (XMLReq.readyState > 1) {
+          item.status = XMLReq.status;
+        }
         item.responseType = XMLReq.responseType;
 
         if (XMLReq.readyState == 0) {
@@ -358,7 +362,7 @@ class VConsoleNetworkTab extends VConsolePlugin {
 
       let query = XMLReq._url.split('?'); // a.php?b=c&d=?e => ['a.php', 'b=c&d=', '?e']
       item.url = query.shift(); // => ['b=c&d=', '?e']
-      
+
       if (query.length > 0) {
         item.getData = {};
         query = query.join('?'); // => 'b=c&d=?e'
@@ -370,7 +374,7 @@ class VConsoleNetworkTab extends VConsolePlugin {
       }
 
       if (item.method == 'POST') {
-        
+
         // save POST data
         if (tool.isString(data)) {
           let arr = data.split('&');
