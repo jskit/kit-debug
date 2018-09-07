@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>kit-debug by vConsole</title>
-  <script>
-  var port = location.port === '80' ? '' : (':' + location.port);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>kit-debug by vConsole</title>
+<style>
+pre{
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+</style>
+<script>
+var port = location.port === '80' ? '' : (':' + location.port);
 
-  // 支持动态切换 api 以及 host
-  window.apiListConfig = {
-    api: {
-      dev: 'http://m.devapi.xxx.com',
-      beta: 'http://m1.betaapi.xxx.com',
-      beta2: 'http://m2.betaapi.xxx.com',
-    },
-    host: {
-      localhost: 'http://localhost' + port,
-      '127.0.0.1': 'http://127.0.0.1' + port,
-      '0.0.0.0': 'http://0.0.0.0' + port,
-      'current': location.origin + port,
-    },
-  };
-  </script>
+// 支持动态切换 api 以及 host
+window.apiListConfig = {
+  api: {
+    dev: 'http://m.devapi.xxx.com',
+    beta: 'http://m1.betaapi.xxx.com',
+    beta2: 'http://m2.betaapi.xxx.com',
+  },
+  host: {
+    localhost: 'http://localhost' + port,
+    '127.0.0.1': 'http://127.0.0.1' + port,
+    '0.0.0.0': 'http://0.0.0.0' + port,
+    'current': location.origin + port,
+  },
+};
+</script>
 </head>
 <body>
 
